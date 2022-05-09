@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Machine</title>
+    <link rel="shortcut icon" href="old-computer2.png">
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        @font-face {
+            font-family: PressStart2P;
+            src: url(PressStart2P.ttf);
+        }
+
+        body {
+            background: radial-gradient(#222922, #000500);
+            font-family: 'Source Code Pro', monospace;
+            font-weight: 400;
+            overflow: hidden;
+            padding: 30px 0 0 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3em;
+            /* font-family: PressStart2P; */
+            text-shadow: 0px 0px 5px #00bb00;
+            color: #00bb00;
+        }
+
+        p {
+            font-size: 1em;
+            text-shadow: 0px 0px 5px #00bb00;
+            color: #00bb00;
+        }
+
+        #storyStart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        .textBtn {
+            border: none;
+            background-color: inherit;
+            cursor: pointer;
+            font-size: 2em;
+            margin: 0 15px;
+            margin-top: 3em;
+            /* font-family: 'Press Start 2P'; */
+            font-weight: 300;
+            color: #f2f251;
+            text-shadow: 0px 0px 2px rgba(242, 242, 81, 0.5);
+            outline: none;
+            animation: pulseyellow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseyellow {
+            0% {
+                text-shadow: 0px 0px 2px rgba(242, 242, 81, 0.6);
+            }
+
+            50% {
+                text-shadow: 0px 0px 4px rgba(242, 242, 81, 1);
+            }
+
+            100% {
+                text-shadow: 0px 0px 2px rgba(242, 242, 81, 0.6);
+            }
+        }
+
+        #container {
+            position: relative;
+        }
+
+        #error {
+            position: absolute;
+            display: none;
+            z-index: 0;
+
+        }
+
+        #quote {
+            position: absolute;
+            font-size: 2em;
+            color: black;
+            z-index: 5;
+            /* display: none; */
+
+        }
+
+        li {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            color: #00bb00;
+            z-index: 2;
+        }
+
+        #contain {
+            display: none;
+            font-size: 20px;
+        }
+
+        #nextBtn {
+            display: none;
+            position: absolute;
+            z-index: 10;
+        }
+
+        #defineMyself {
+            display: none;
+        }
+
+        #description{
+            display: none; 
+        }
+
+        #more{
+            display: none; 
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+</head>
+
+<body>
+    <div id="storyStart">
+        <h1>Welcome To Your Memory</h1><br><br>
+        <p>We are landing on your memory of 2022.</p>
+        <button class="textBtn" id="deleteBtn">>Delete</button>
+        <button class="textBtn" id="continueBtn">>Continue</button>
+    </div>
+
+    <div id="container">
+        <div id="error">
+            <img src="error.jpeg">
+        </div>
+        <div id="quote">
+            “Never regret yesterday. Life is in you today, and you make your tomorrow.”
+        </div>
+    </div>
+
+    <div id="contain">
+        <!-- <ul id="tags"> -->
+        <li>Covid 19</li>
+        <li>Evaluation </li>
+        <li>Peer Pressure </li>
+        <li>Deadline </li>
+        <li>Due </li>
+        <li>Mask</li>
+        <li>Internship </li>
+        <li>Final </li>
+        <li>Graduation </li>
+        <li>ITP </li>
+        <li>Fabrication </li>
+        <li>Interview </li>
+        <li>Inflation</li>
+        <li>Ukraine </li>
+        <li>New Coronavirus </li>
+        <li>Vaccine </li>
+        <li>Isolation </li>
+        <li>Mass Shootings</li>
+        <li>Climate Change </li>
+        <li>Health Care </li>
+        <li>Uncertainty </li>
+        <li>Schoolwork </li>
+        <li>Did Nothing </li>
+        <li>Restless </li>
+        <!-- </ul> -->
+    </div>
+    <button class="textBtn" id="nextBtn">>How about yourself?</button>
+
+    <div id="defineMyself">
+        <h1>How are you?</h1>
+    </div>
+    <p id="description">We are often influenced by the things around us, but we forget that "myself" is our own unique keyword.</p>
+    <p id="more">Choose three of the following words to start the journey of your memory.</p>
+
+
+</body>
+<script>
+    var lis = document.getElementsByTagName("li");
+    var winWidth = window.innerWidth;
+    var winHeight = window.innerHeight;
+    var count = 20;
+
+    function setTime() {
+        count += 5;
+        // console.log(count);
+        document.getElementById("contain").style.fontSize = count + "px";
+    }
+
+
+    for (var i = 0; i < lis.length; i++) {
+        var thisLi = lis[i];
+        randomTop = getRandomNumber(0, winHeight);
+        randomLeft = getRandomNumber(0, winWidth);
+
+        thisLi.style.top = randomTop + "px";
+        thisLi.style.left = randomLeft + "px";
+        // lis.style.fontSize = "x-large";
+    }
+
+    function getRandomNumber(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+
+    var url = "error.jpeg";
+    $(document).ready(function () {
+        $("#error").hover(function () {
+            var image = new Image();
+            image.src = url;
+            $('#error').append(image);
+        });
+
+        $("#error").click(function () {
+            // console.log("here");
+            $("#quote").append("The past can’t hurt you anymore, not unless you let it.");
+        });
+
+        // $("#error").draggable();
+    })
+
+    document.getElementById("deleteBtn").addEventListener("click", error);
+
+    function error() {
+        document.getElementById("storyStart").style.display = "none";
+        document.getElementById("error").style.display = "block";
+    }
+
+    document.getElementById("continueBtn").addEventListener("click", con);
+
+    function con() {
+        document.getElementById("storyStart").style.display = "none";
+        document.getElementById("quote").style.display = "none";
+        document.getElementById("contain").style.display = "block";
+        document.getElementById("nextBtn").style.display = "block";
+
+        setInterval(setTime, 1000);
+        alert("Life is full of pressure...");
+        alert("Does your memory include these?");
+    }
+
+    document.getElementById("nextBtn").addEventListener("click", next);
+
+    function next() {
+        setTimeout(function(){
+            window.location.href = "yourself.html";
+          }, 3000);
+    }
+
+
+
+
+
+</script>
+
+</html>
